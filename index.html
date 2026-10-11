@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="আমাদের কাজের জগৎ - আপনার পছন্দের কাজের প্যাকেজ বেছে নিন এবং অ্যাডমিনের সঙ্গে যোগাযোগ করুন।">
+  <title>আমাদের কাজের জগৎ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a1a4e;
+      --secondary: #4a1c6b;
+      --accent-pink: #e91e8c;
+      --accent-cyan: #00d4ff;
+      --accent-sky: #38bdf8;
+      --accent-purple: #a855f7;
+      --gradient-main: linear-gradient(135deg, #0f0c29 0%, #302b63 40%, #24243e 70%, #1a1a4e 100%);
+      --gradient-card1: linear-gradient(145deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+      --gradient-card2: linear-gradient(145deg, #581c87 0%, #a855f7 50%, #ec4899 100%);
+      --gradient-card3: linear-gradient(145deg, #831843 0%, #e91e8c 50%, #f472b6 100%);
+      --gradient-btn: linear-gradient(90deg, #00d4ff, #a855f7, #e91e8c);
+      --gradient-hero: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(168,85,247,0.2), rgba(233,30,140,0.15));
+      --text: #f1f5f9;
+      --text-muted: #cbd5e1;
+      --card-bg: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.08);
+      --shadow: 0 20px 40px rgba(0,0,0,0.35);
+      --radius: 20px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Hind Siliguri', 'Kalpurush', 'SolaimanLipi', system-ui, sans-serif;
+      background: var(--gradient-main);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(15, 12, 41, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.3s ease;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--gradient-btn);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 15px rgba(168,85,247,0.4);
+    }
+
+    .logo-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .nav a {
+      padding: 0.5rem 0.9rem;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      background: rgba(255,255,255,0.1);
+      color: var(--accent-cyan);
+      outline: none;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.15rem;
+      background: var(--gradient-btn);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(168,85,247,0.45);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .header-cta:hover,
+    .header-cta:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(168,85,247,0.55);
+      outline: none;
+    }
+
+    .header-cta svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.4rem;
+      border-radius: 8px;
+    }
+
+    .menu-toggle:focus-visible {
+      outline: 2px solid var(--accent-cyan);
+    }
+
+    .menu-toggle svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    /* Mobile menu */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      padding: 1rem 1.25rem 1.5rem;
+      background: rgba(15,12,41,0.97);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .mobile-nav a:hover,
+    .mobile-nav a:focus-visible {
+      background: rgba(255,255,255,0.1);
+      outline: none;
+    }
+
+    .mobile-nav .header-cta {
+      margin-top: 0.75rem;
+      justify-content: center;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 8.5rem 1.25rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-hero);
+      pointer-events: none;
+    }
+
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-blob-1 {
+      width: 400px;
+      height: 400px;
+      background: #00d4ff;
+      top: -100px;
+      left: -100px;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .hero-blob-2 {
+      width: 350px;
+      height: 350px;
+      background: #a855f7;
+      top: 20%;
+      right: -80px;
+      animation: float 15s ease-in-out infinite reverse;
+    }
+
+    .hero-blob-3 {
+      width: 300px;
+      height: 300px;
+      background: #e91e8c;
+      bottom: -50px;
+      left: 30%;
+      animation: float 18s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, -40px); }
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(90deg, #fff, #00d4ff, #e91e8c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.6rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid var(--accent-cyan);
+      outline-offset: 3px;
+    }
+
+    .btn-primary {
+      background: var(--gradient-btn);
+      color: white;
+      box-shadow: 0 6px 25px rgba(168,85,247,0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(168,85,247,0.55);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.35);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 4.5rem 1.25rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    /* ========== PACKAGES ========== */
+    .packages {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .package-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+      box-shadow: var(--shadow);
+    }
+
+    .package-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .package-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .package-card.card-1::before { background: var(--gradient-card1); }
+    .package-card.card-2::before { background: var(--gradient-card2); }
+    .package-card.card-3::before { background: var(--gradient-card3); }
+
+    .package-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .card-1 .package-icon { background: var(--gradient-card1); }
+    .card-2 .package-icon { background: var(--gradient-card2); }
+    .card-3 .package-icon { background: var(--gradient-card3); }
+
+    .package-icon svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
+    }
+
+    .package-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .package-card .subtitle {
+      color: var(--accent-cyan);
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .package-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      flex-grow: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .package-card .btn {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .card-1 .btn { background: var(--gradient-card1); }
+    .card-2 .btn { background: var(--gradient-card2); }
+    .card-3 .btn { background: var(--gradient-card3); }
+
+    /* ========== ABOUT ========== */
+    .about-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .about-content p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* ========== SUPPORT ========== */
+    .support {
+      background: rgba(0,0,0,0.2);
+    }
+
+    .support-box {
+      max-width: 650px;
+      margin: 0 auto;
+      text-align: center;
+      background: linear-gradient(145deg, rgba(30,58,138,0.4), rgba(88,28,135,0.4), rgba(131,24,67,0.35));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .support-box::after {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(0,212,255,0.25), transparent 70%);
+      top: -60px;
+      right: -40px;
+      pointer-events: none;
+    }
+
+    .support-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      background: var(--gradient-btn);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(168,85,247,0.4);
+    }
+
+    .support-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: white;
+    }
+
+    .support-box h2 {
+      font-size: 1.7rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .support-box p {
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      font-size: 1.05rem;
+    }
+
+    .support-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 1rem 2rem;
+      background: var(--gradient-btn);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(168,85,247,0.5);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .support-btn:hover,
+    .support-btn:focus-visible {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(168,85,247,0.6);
+      outline: none;
+    }
+
+    .support-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .support-label {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: rgba(0,0,0,0.35);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 3rem 1.25rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--accent-cyan);
+      outline: none;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      max-width: 520px;
+      margin: 0 auto 1rem;
+      line-height: 1.6;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    /* ========== FLOATING BUTTON ========== */
+    .float-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 900;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gradient-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(168,85,247,0.55);
+      display: grid;
+      place-items: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .float-btn:hover,
+    .float-btn:focus-visible {
+      transform: scale(1.1);
+      box-shadow: 0 12px 35px rgba(168,85,247,0.65);
+      outline: none;
+      animation: none;
+    }
+
+    .float-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 8px 25px rgba(168,85,247,0.55); }
+      50% { box-shadow: 0 8px 35px rgba(0,212,255,0.5); }
+    }
+
+    /* ========== WARNING BANNER ========== */
+    .warning-banner {
+      display: none;
+      background: linear-gradient(90deg, #b91c1c, #9f1239);
+      color: white;
+      text-align: center;
+      padding: 0.85rem 1rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1100;
+    }
+
+    .warning-banner.show {
+      display: block;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 860px) {
+      .nav { display: none; }
+      .header-cta.desktop { display: none; }
+      .menu-toggle { display: block; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 7.5rem 1rem 3.5rem; }
+      .hero h1 { font-size: 1.75rem; }
+      section { padding: 3.5rem 1rem; }
+      .package-card { padding: 1.6rem 1.35rem; }
+      .support-box { padding: 2.25rem 1.35rem; }
+      .float-btn {
+        width: 54px;
+        height: 54px;
+        bottom: 1.1rem;
+        right: 1.1rem;
+      }
+      .float-btn svg { width: 24px; height: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- সতর্কবার্তা (ইউজারনেম পরিবর্তন না হলে) -->
+  <div id="warningBanner" class="warning-banner" role="alert">
+    ⚠️ অনুগ্রহ করে JavaScript-এর শুরুতে আপনার আসল টেলিগ্রাম ইউজারনেম বসান। এখনও "YOUR_TELEGRAM_USERNAME" আছে।
+  </div>
+
+  <!-- হেডার -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#home" class="logo" aria-label="আমাদের কাজের জগৎ - প্রচ্ছদ">
+        <span class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </span>
+        <span>আমাদের কাজের জগৎ</span>
+      </a>
+
+      <nav class="nav" aria-label="প্রধান মেনু">
+        <a href="#home">প্রচ্ছদ</a>
+        <a href="#about">আমাদের সম্পর্কে</a>
+        <a href="#packages">কাজের প্যাকেজ</a>
+        <a href="#contact">যোগাযোগ</a>
+      </nav>
+
+      <button class="header-cta desktop" id="headerTelegramBtn" type="button" aria-label="টেলিগ্রামে যোগাযোগ">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+        টেলিগ্রামে যোগাযোগ
+      </button>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="মেনু খুলুন" aria-expanded="false" aria-controls="mobileNav">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="মোবাইল মেনু">
+      <a href="#home">প্রচ্ছদ</a>
+      <a href="#about">আমাদের সম্পর্কে</a>
+      <a href="#packages">কাজের প্যাকেজ</a>
+      <a href="#contact">যোগাযোগ</a>
+      <button class="header-cta" id="mobileTelegramBtn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+        টেলিগ্রামে যোগাযোগ
+      </button>
+    </nav>
+  </header>
+
+  <!-- প্রধান অংশ -->
+  <main>
+    <!-- হিরো -->
+    <section class="hero" id="home">
+      <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+      <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+      <div class="hero-blob hero-blob-3" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1>আপনার পছন্দের কাজ শুরু করুন আজই!</h1>
+        <p>আমাদের কাজের প্যাকেজগুলো দেখে আপনার পছন্দের প্যাকেজ বেছে নিন। কাজের নিয়ম ও বিস্তারিত জানতে সরাসরি অ্যাডমিনের সঙ্গে যোগাযোগ করুন।</p>
+        <div class="hero-buttons">
+          <a href="#packages" class="btn btn-primary">প্যাকেজগুলো দেখুন</a>
+          <button class="btn btn-outline" id="heroAdminBtn" type="button">অ্যাডমিনের সঙ্গে কথা বলুন</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- কাজের প্যাকেজ -->
+    <section class="packages" id="packages">
+      <div class="container">
+        <h2 class="section-title">কাজের প্যাকেজ</h2>
+        <p class="section-subtitle">আপনার উপযোগী প্যাকেজ বেছে নিন এবং বিস্তারিত জানতে অ্যাডমিনের সঙ্গে যোগাযোগ করুন।</p>
+
+        <div class="package-grid">
+          <!-- প্যাকেজ ১ -->
+          <article class="package-card card-1">
+            <div class="package-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <h3>বেসিক প্যাকেজ</h3>
+            <div class="subtitle">সহজভাবে শুরু করুন</div>
+            <p>এই প্যাকেজের কাজের ধরন, নিয়ম ও প্রয়োজনীয় তথ্য জানতে অ্যাডমিনের সঙ্গে যোগাযোগ করুন।</p>
+            <button class="btn btn-primary package-btn" data-package="বেসিক প্যাকেজ" type="button">কাজ করতে চাই</button>
+          </article>
+
+          <!-- প্যাকেজ ২ -->
+          <article class="package-card card-2">
+            <div class="package-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            </div>
+            <h3>স্ট্যান্ডার্ড প্যাকেজ</h3>
+            <div class="subtitle">আপনার কাজের পরবর্তী ধাপ</div>
+            <p>এই প্যাকেজের কাজের বিবরণ, যোগ্যতা ও শর্তাবলি জানতে অ্যাডমিনের সঙ্গে যোগাযোগ করুন।</p>
+            <button class="btn btn-primary package-btn" data-package="স্ট্যান্ডার্ড প্যাকেজ" type="button">কাজ করতে চাই</button>
+          </article>
+
+          <!-- প্যাকেজ ৩ -->
+          <article class="package-card card-3">
+            <div class="package-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+            <h3>প্রিমিয়াম প্যাকেজ</h3>
+            <div class="subtitle">বিস্তারিত জেনে সিদ্ধান্ত নিন</div>
+            <p>এই প্যাকেজের বৈশিষ্ট্য, কাজের নিয়ম ও বিস্তারিত তথ্য অ্যাডমিনের কাছ থেকে জেনে নিন।</p>
+            <button class="btn btn-primary package-btn" data-package="প্রিমিয়াম প্যাকেজ" type="button">কাজ করতে চাই</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- আমাদের সম্পর্কে -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">আমাদের সম্পর্কে</h2>
+        <div class="about-content">
+          <p>এখানে আপনি উপলব্ধ কাজের প্যাকেজগুলো সম্পর্কে জানতে পারবেন। কাজ শুরু করার আগে প্যাকেজের নিয়ম, যোগ্যতা ও বিস্তারিত তথ্য অ্যাডমিনের কাছ থেকে নিশ্চিত হয়ে নিন।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- সাপোর্ট / যোগাযোগ -->
+    <section class="support" id="contact">
+      <div class="container">
+        <div class="support-box">
+          <div class="support-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
+          <h2>সাহায্য প্রয়োজন?</h2>
+          <p>কাজের বিস্তারিত জানতে বা যেকোনো প্রশ্নের জন্য আমাদের অ্যাডমিনের সঙ্গে যোগাযোগ করুন।</p>
+          <button class="support-btn" id="supportTelegramBtn" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            অ্যাডমিনের সঙ্গে যোগাযোগ করুন
+          </button>
+          <div class="support-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            টেলিগ্রাম সাপোর্ট
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ফুটার -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <span class="logo-icon" style="width:32px;height:32px;border-radius:8px;" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </span>
+      আমাদের কাজের জগৎ
+    </div>
+    <nav class="footer-links" aria-label="ফুটার মেনু">
+      <a href="#home">প্রচ্ছদ</a>
+      <a href="#about">আমাদের সম্পর্কে</a>
+      <a href="#packages">কাজের প্যাকেজ</a>
+      <a href="#contact">সাপোর্ট</a>
+      <a href="#" id="footerTelegramLink">টেলিগ্রামে যোগাযোগ</a>
+    </nav>
+    <p class="footer-note">
+      কাজ শুরু করার আগে অ্যাডমিনের কাছ থেকে সম্পূর্ণ নিয়ম ও শর্তাবলি নিশ্চিত হয়ে নিন। এই ওয়েবসাইট শুধুমাত্র তথ্য প্রদানের জন্য।
+    </p>
+    <p class="footer-copy">© <span id="currentYear"></span> আমাদের কাজের জগৎ। সর্বস্বত্ব সংরক্ষিত।</p>
+  </footer>
+
+  <!-- ভাসমান সাপোর্ট বাটন -->
+  <button class="float-btn" id="floatTelegramBtn" type="button" aria-label="টেলিগ্রাম সাপোর্ট">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+  </button>
+
+  <script>
+    // ========== টেলিগ্রাম সেটিং ==========
+    // এখানে আপনার আসল Telegram ইউজারনেম বসান (@ চিহ্ন ছাড়া)
+    const TELEGRAM_USERNAME = "YOUR_TELEGRAM_USERNAME";
+
+    // ========== সাহায্যকারী ফাংশন ==========
+    function getTelegramLink(message) {
+      const base = "https://t.me/" + TELEGRAM_USERNAME;
+      if (message) {
+        return base + "?text=" + encodeURIComponent(message);
+      }
+      return base;
+    }
+
+    function openTelegram(message) {
+      if (TELEGRAM_USERNAME === "YOUR_TELEGRAM_USERNAME") {
+        alert("অনুগ্রহ করে প্রথমে JavaScript-এর শুরুতে আপনার আসল টেলিগ্রাম ইউজারনেম বসান।");
+        return;
+      }
+      window.open(getTelegramLink(message), "_blank", "noopener,noreferrer");
+    }
+
+    // সতর্কবার্তা দেখানো
+    if (TELEGRAM_USERNAME === "YOUR_TELEGRAM_USERNAME") {
+      document.getElementById("warningBanner").classList.add("show");
+    }
+
+    // বর্তমান বছর
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+    // মোবাইল মেনু
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileNav = document.getElementById("mobileNav");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.setAttribute("aria-label", isOpen ? "মেনু বন্ধ করুন" : "মেনু খুলুন");
+    });
+
+    // মোবাইল মেনু লিংক ক্লিক করলে বন্ধ
+    mobileNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "মেনু খুলুন");
+      });
+    });
+
+    // সব টেলিগ্রাম বাটন
+    document.getElementById("headerTelegramBtn").addEventListener("click", () => openTelegram());
+    document.getElementById("mobileTelegramBtn").addEventListener("click", () => openTelegram());
+    document.getElementById("heroAdminBtn").addEventListener("click", () => openTelegram("আমি অ্যাডমিনের সঙ্গে কথা বলতে চাই।"));
+    document.getElementById("supportTelegramBtn").addEventListener("click", () => openTelegram("সাহায্য প্রয়োজন।"));
+    document.getElementById("floatTelegramBtn").addEventListener("click", () => openTelegram());
+    document.getElementById("footerTelegramLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      openTelegram();
+    });
+
+    // প্যাকেজ বাটনগুলো
+    document.querySelectorAll(".package-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const pkg = btn.getAttribute("data-package");
+        openTelegram("আমি \"" + pkg + "\"-এ আগ্রহী। বিস্তারিত জানতে চাই।");
+      });
+    });
+  </script>
+</body>
+</html>
